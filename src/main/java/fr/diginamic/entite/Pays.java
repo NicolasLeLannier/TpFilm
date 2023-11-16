@@ -61,6 +61,22 @@ public class Pays {
 	public String toString() {
 		return "Pays [id=" + id + ", nom=" + nom + ", url=" + url + "]";
 	}
+	
+	
+	/**
+	 * @param listPays
+	 * @param nomPays
+	 * @return
+	 */
+	public static Pays getPaysByNom(List<Pays> listPays, String nom) {
+		for (Pays pays : listPays) {
+			if (pays.getNom().equals(nom)) {
+				return pays;
+			}
+		}
+		return null;
+	}
+	
 
 	/** Getter
 	 * @return the id

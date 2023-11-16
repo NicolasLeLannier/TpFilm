@@ -74,8 +74,9 @@ public class Film {
 	
 	/** listeFilm */
 	@OneToMany(mappedBy="film")
-	private List<Role> listeFilm;
+	private List<Role> listeRole;
 	
+	/** acteur */
 	@ManyToMany
 	@JoinTable(name = "CASTING_PRINCIPAL",joinColumns = @JoinColumn(name = "ID_FILM", referencedColumnName = "ID"), 
 								inverseJoinColumns = @JoinColumn(name = "ID_ACTEUR", referencedColumnName = "ID"))
@@ -107,14 +108,12 @@ public class Film {
 	public Film() {
 		super();
 	}
-
-	/**
-	 *
-	 */
+	
 	@Override
 	public String toString() {
 		return "Film [id=" + id + ", id_imdb=" + id_imdb + ", nom=" + nom + ", annee=" + annee + ", rating=" + rating
-				+ ", url=" + url + ", lieu_tournage=" + lieu_tournage + ", resume=" + resume + "]";
+				+ ", url=" + url + ", lieu_tournage=" + lieu_tournage + ", resume=" + resume + ", langue=" + langue
+				+ ", pays=" + pays + ", genres=" + genres + "]";
 	}
 
 	/** Getter
@@ -260,15 +259,15 @@ public class Film {
 	/** Getter
 	 * @return the listeFilm
 	 */
-	public List<Role> getListeFilm() {
-		return listeFilm;
+	public List<Role> getListeRole() {
+		return listeRole;
 	}
 
 	/** Setter
 	 * @param listeFilm the listeFilm to set
 	 */
-	public void setListeFilm(List<Role> listeFilm) {
-		this.listeFilm = listeFilm;
+	public void setListeRole(List<Role> listeRole) {
+		this.listeRole = listeRole;
 	}
 
 	/** Getter

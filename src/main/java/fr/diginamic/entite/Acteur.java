@@ -81,6 +81,24 @@ public class Acteur {
 		return "Acteur [id=" + id + ", id_imdb=" + idImdb + ", identite=" + identite + ", date_naissance="
 				+ dateNaissance + ", url=" + url + "]";
 	}
+	
+	
+	/**
+	 * @param acteurs
+	 * @param idImdb
+	 * @return
+	 */
+	public Acteur rechercheParImdb(List<Acteur> acteurs, String idImdb) {
+        Acteur acteur = null;
+        for(Acteur a : acteurs) {
+            if(a.getIdImdb().equals(idImdb)) {
+                acteur = a;
+                break;
+            }
+        }
+        return acteur;
+    }
+	
 
 	/** Getter
 	 * @return the id

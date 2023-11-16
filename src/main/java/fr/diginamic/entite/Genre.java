@@ -53,6 +53,22 @@ public class Genre {
 	public String toString() {
 		return "Genre [id=" + id + ", nom=" + nom + "]";
 	}
+	
+	
+	/**
+	 * @param listGenre
+	 * @param nom
+	 * @return
+	 */
+	public static Genre getGenreByNom(List<Genre> listGenre, String nom) {
+		for(Genre genres : listGenre) {
+			if(genres.getNom().equals(nom)) {
+				return genres;
+			}
+		}
+		return null;
+	}
+	
 
 	/** Getter
 	 * @return the id

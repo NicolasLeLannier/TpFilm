@@ -47,6 +47,23 @@ public class Langue {
 	public Langue() {
 		super();
 	}
+	
+	
+	
+	/**
+	 * @param listLangue
+	 * @param nom
+	 * @return
+	 */
+	public static Langue getLangueByNom(List<Langue> listLangue, String nom) {
+		for(Langue langues : listLangue) {
+			if(langues.getNom().equals(nom)) {
+				return langues;
+			}
+		}
+		return null;
+	}
+	
 
 	/**
 	 *
