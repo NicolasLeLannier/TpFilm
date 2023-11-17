@@ -13,6 +13,7 @@ import fr.diginamic.entite.Genre;
 import fr.diginamic.entite.Langue;
 import fr.diginamic.entite.Pays;
 import fr.diginamic.entite.Realisateur;
+import fr.diginamic.entite.Role;
 import fr.diginamic.service.LecteurCsv;
 
 public class IntegrationTpFilm {
@@ -42,10 +43,10 @@ public class IntegrationTpFilm {
 		List<Pays> arrayPays = lecteurCsv.parsePays(fichierPays);
 		List<Acteur> arrayActeur = lecteurCsv.parseActeur(fichierActeur);
 		List<Realisateur> arrayRealisateur = lecteurCsv.parseRealisateur(fichierRealisateur);
-//		List<Genre> arrayGenre = lecteurCsv.parseGenre(fichierFilm);
 		List<Film> arrayFilm = lecteurCsv.parseFilm(fichierFilm, fichierPays);
-//		List<Langue> arrayLangue = lecteurCsv.parseLangue(fichierFilm);
-		System.out.println(arrayFilm);
+		List<Role> arrayRole = lecteurCsv.parseRole(fichierRole);
+
+		System.out.println(arrayRole);
 		
 
 //		String[] tokens = afficherFichier.split("\\|", -1);

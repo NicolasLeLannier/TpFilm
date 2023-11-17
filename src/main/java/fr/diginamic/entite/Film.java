@@ -1,5 +1,6 @@
 package fr.diginamic.entite;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -29,7 +30,7 @@ public class Film {
 	
 	/** id_imdb */
 	@Column(unique=true)
-	private String id_imdb;
+	private String idImdb;
 	
 	/** nom */
 	@Column(unique=true)
@@ -80,7 +81,7 @@ public class Film {
 	@ManyToMany
 	@JoinTable(name = "CASTING_PRINCIPAL",joinColumns = @JoinColumn(name = "ID_FILM", referencedColumnName = "ID"), 
 								inverseJoinColumns = @JoinColumn(name = "ID_ACTEUR", referencedColumnName = "ID"))
-	private List<Acteur> acteur;
+	private List<Acteur> acteur = new ArrayList<>();
 
 	/** Constructor
 	 * @param id_imdb
@@ -91,9 +92,9 @@ public class Film {
 	 * @param lieu_tournage
 	 * @param resume
 	 */
-	public Film(String id_imdb, String nom, String annee, String rating, String url, String lieu_tournage, String resume) {
+	public Film(String idImdb, String nom, String annee, String rating, String url, String lieu_tournage, String resume) {
 		super();
-		this.id_imdb = id_imdb;
+		this.idImdb = idImdb;
 		this.nom = nom;
 		this.annee = annee;
 		this.rating = rating;
@@ -111,11 +112,30 @@ public class Film {
 	
 	@Override
 	public String toString() {
-		return "Film [id=" + id + ", id_imdb=" + id_imdb + ", nom=" + nom + ", annee=" + annee + ", rating=" + rating
+		return "Film [id=" + id + ", idImdb=" + idImdb + ", nom=" + nom + ", annee=" + annee + ", rating=" + rating
 				+ ", url=" + url + ", lieu_tournage=" + lieu_tournage + ", resume=" + resume + ", langue=" + langue
 				+ ", pays=" + pays + ", genres=" + genres + "]";
 	}
-
+	
+	
+	
+	/**
+	 * @param listFilm
+	 * @param nom
+	 * @return
+	 */
+	public static Film getFilmByImdb(List<Film> listFilm, String idmb) {
+		Film film = null;
+		for(Film f : listFilm) {
+			if(f.getIdImdb().equals(idmb)) {
+				film = f;;
+				break;
+			}
+		}
+		return film;
+	}
+	
+	
 	/** Getter
 	 * @return the id
 	 */
@@ -133,15 +153,15 @@ public class Film {
 	/** Getter
 	 * @return the id_imdb
 	 */
-	public String getId_imdb() {
-		return id_imdb;
+	public String getIdImdb() {
+		return idImdb;
 	}
 
 	/** Setter
 	 * @param id_imdb the id_imdb to set
 	 */
-	public void setId_imdb(String id_imdb) {
-		this.id_imdb = id_imdb;
+	public void setIdImdb(String idImdb) {
+		this.idImdb = idImdb;
 	}
 
 	/** Getter

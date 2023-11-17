@@ -47,8 +47,8 @@ public class Realisateur {
 	
 	/** acteur */
 	@ManyToOne
-	@JoinColumn(name = "ID_LIEU_NAISSANCE_REALISATEUR")
-	private Realisateur idLieuNaissanceRealisateur;
+	@JoinColumn(name = "LIEU_NAISSANCE_REALISATEUR")
+	private LieuNaissance lieuNaissanceRealisateur;
 
 	/** Constructor
 	 * @param id_imdb
@@ -76,8 +76,9 @@ public class Realisateur {
 	 */
 	@Override
 	public String toString() {
-		return "Realisateur [id=" + id + ", id_imdb=" + idImdb + ", identite=" + identite + ", date_naissance="
-				+ dateNaissance + ", url=" + url + "]";
+		return "Realisateur [id=" + id + ", idImdb=" + idImdb + ", identite=" + identite + ", dateNaissance="
+				+ dateNaissance + ", url=" + url + ", films=" + films + ", lieuNaissanceRealisateur="
+				+ lieuNaissanceRealisateur + "]";
 	}
 
 	/** Getter
@@ -165,18 +166,20 @@ public class Realisateur {
 	}
 
 	/** Getter
-	 * @return the idLieuNaissanceRealisateur
+	 * @return the lieuNaissanceRealisateur
 	 */
-	public Realisateur getIdLieuNaissanceRealisateur() {
-		return idLieuNaissanceRealisateur;
+	public LieuNaissance getLieuNaissanceRealisateur() {
+		return lieuNaissanceRealisateur;
 	}
 
 	/** Setter
-	 * @param idLieuNaissanceRealisateur the idLieuNaissanceRealisateur to set
+	 * @param lieuNaissanceRealisateur the lieuNaissanceRealisateur to set
 	 */
-	public void setIdLieuNaissanceRealisateur(Realisateur idLieuNaissanceRealisateur) {
-		this.idLieuNaissanceRealisateur = idLieuNaissanceRealisateur;
+	public void setLieuNaissanceRealisateur(LieuNaissance lieuNaissanceRealisateur) {
+		this.lieuNaissanceRealisateur = lieuNaissanceRealisateur;
 	}
+
+
 	
 	
 }

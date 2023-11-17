@@ -1,6 +1,7 @@
 package fr.diginamic.entite;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -48,12 +49,12 @@ public class Acteur {
 	
 	/** acteur */
 	@ManyToOne
-	@JoinColumn(name = "ID_LIEU_NAISSANCE_ACTEUR")
-	private Acteur idLieuNaissanceActeur;
+	@JoinColumn(name = "LIEU_NAISSANCE_ACTEUR")
+	private LieuNaissance lieuNaissanceActeur;
 	
 	/** films */
 	@ManyToMany(mappedBy = "acteur")
-	private List<Film> films;
+	private List<Film> films = new ArrayList<>();
 
 	/** Constructor
 	 * @param id_imdb
@@ -79,25 +80,23 @@ public class Acteur {
 	@Override
 	public String toString() {
 		return "Acteur [id=" + id + ", id_imdb=" + idImdb + ", identite=" + identite + ", date_naissance="
-				+ dateNaissance + ", url=" + url + "]";
+				+ dateNaissance + ", url=" + url  + ", lieuNaissanceActeur="
+				+ lieuNaissanceActeur + "]";
 	}
 	
-	
 	/**
-	 * @param acteurs
-	 * @param idImdb
+	 * @param listActeur
+	 * @param idmb
 	 * @return
 	 */
-	public Acteur rechercheParImdb(List<Acteur> acteurs, String idImdb) {
-        Acteur acteur = null;
-        for(Acteur a : acteurs) {
-            if(a.getIdImdb().equals(idImdb)) {
-                acteur = a;
-                break;
-            }
-        }
-        return acteur;
-    }
+	public static Acteur getActeurByImdb(List<Acteur> listActeur, String idmb) {
+		for(Acteur acteurs : listActeur) {
+			if(acteurs.getIdImdb().equals(idmb)) {
+				return acteurs;
+			}
+		}
+		return null;
+	}
 	
 
 	/** Getter
@@ -200,18 +199,19 @@ public class Acteur {
 	}
 
 	/** Getter
-	 * @return the idLieuNaissance
+	 * @return the lieuNaissanceActeur
 	 */
-	public Acteur getIdLieuNaissance() {
-		return idLieuNaissanceActeur;
+	public LieuNaissance getLieuNaissanceActeur() {
+		return lieuNaissanceActeur;
 	}
 
 	/** Setter
-	 * @param idLieuNaissance the idLieuNaissance to set
+	 * @param lieuNaissanceActeur the lieuNaissanceActeur to set
 	 */
-	public void setIdLieuNaissanceActeur(Acteur idLieuNaissanceActeur) {
-		this.idLieuNaissanceActeur = idLieuNaissanceActeur;
+	public void setLieuNaissanceActeur(LieuNaissance lieuNaissanceActeur) {
+		this.lieuNaissanceActeur = lieuNaissanceActeur;
 	}
+
 	
 	
 }

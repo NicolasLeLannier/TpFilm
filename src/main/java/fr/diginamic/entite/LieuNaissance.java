@@ -53,6 +53,17 @@ public class LieuNaissance {
 	public String toString() {
 		return "LieuNaissance [id=" + id + ", nom=" + nom + "]";
 	}
+	
+	
+	public static LieuNaissance getLieuNaissanceByNom(List<LieuNaissance> listLieuNaissance, String nom) {
+		for(LieuNaissance LieuxNaissances : listLieuNaissance) {
+			if(LieuxNaissances.getNom().equals(nom)) {
+				return LieuxNaissances;
+			}
+		}
+		return null;
+	}
+	
 
 	/** Getter
 	 * @return the id

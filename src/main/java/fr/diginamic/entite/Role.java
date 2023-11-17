@@ -38,6 +38,14 @@ public class Role {
 		super();
 	}
 
+	/** Constructor
+	 * @param personnage
+	 */
+	public Role(String personnage) {
+		super();
+		this.personnage = personnage;
+	}
+
 	@Override
 	public String toString() {
 		return "Role [id=" + id + ", personnage=" + personnage + ", acteur=" + acteur + ", film=" + film + "]";
