@@ -49,6 +49,7 @@ public class Film {
 	private String lieu_tournage;
 	
 	/** resume */
+	@Column(length = 2000)
 	private String resume;
 	
 	/** langue */

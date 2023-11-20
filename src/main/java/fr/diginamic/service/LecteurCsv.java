@@ -114,6 +114,7 @@ public class LecteurCsv {
 				ligneLieuNaissance = ligneLieuNaissance.replaceAll("é", "e");
 				ligneLieuNaissance = ligneLieuNaissance.replaceAll("è", "e");
 				ligneLieuNaissance = ligneLieuNaissance.replaceAll("Î", "I");
+				ligneLieuNaissance = ligneLieuNaissance.replaceAll("ü", "u");
 				ligneLieuNaissance = ligneLieuNaissance.trim();
 				if(!ligneLieuNaissance.isEmpty()) {
 					ligneLieuNaissance = ligneLieuNaissance.substring(0, 1).toUpperCase() + ligneLieuNaissance.substring(1);
@@ -174,6 +175,7 @@ public class LecteurCsv {
 				ligneLieuNaissance = ligneLieuNaissance.replaceAll("é", "e");
 				ligneLieuNaissance = ligneLieuNaissance.replaceAll("è", "e");
 				ligneLieuNaissance = ligneLieuNaissance.replaceAll("Î", "I");
+				ligneLieuNaissance = ligneLieuNaissance.replaceAll("ü", "u");
 				ligneLieuNaissance = ligneLieuNaissance.trim();
 				if(!ligneLieuNaissance.isEmpty()) {
 					ligneLieuNaissance = ligneLieuNaissance.substring(0, 1).toUpperCase() + ligneLieuNaissance.substring(1);
@@ -201,7 +203,7 @@ public class LecteurCsv {
 
 	
 	// ------------------------------------------------------- PARSE FILM ------------------------------------
-	public List<Film> parseFilm(String fileFilm, String filePays) {
+	public List<Film> parseFilm(String fileFilm, List<Pays> listePaysMAJ, List<Langue> listeLangueMAJ, List<Genre> listeGenreMAJ) {
 
 		List<Film> arrayFilms = new ArrayList<>();
 		List<Genre> arrayGenre = new ArrayList<>();
@@ -242,19 +244,14 @@ public class LecteurCsv {
 				String langue = tokens[7];
 				String resume = tokens[8];
 
-				LecteurCsv lectureCsv = new LecteurCsv();
 
-				arrayPays = lectureCsv.parsePays(filePays);
-				Pays actuelPays = Pays.getPaysByNom(arrayPays, pays);
-
-				arrayLangue = lectureCsv.parseLangue(fileFilm);
-				Langue actuelLangue = Langue.getLangueByNom(arrayLangue, langue);
-
+				Pays actuelPays = Pays.getPaysByNom(listePaysMAJ, pays);
+				Langue actuelLangue = Langue.getLangueByNom(listeLangueMAJ, langue);
+				
 				List<Genre> arrayActuelGenre = new ArrayList<>();
-				arrayGenre = lectureCsv.parseGenre(fileFilm);
 				String[] listGenre = ligneGenre.split(",");
 				for (String genres : listGenre) {
-					Genre actuelGenre = Genre.getGenreByNom(arrayGenre, genres);
+					Genre actuelGenre = Genre.getGenreByNom(listeGenreMAJ, genres);
 					arrayActuelGenre.add(actuelGenre);
 				}
 
@@ -373,6 +370,7 @@ public class LecteurCsv {
 				lineLieuxNaissances = lineLieuxNaissances.replaceAll("é", "e");
 				lineLieuxNaissances = lineLieuxNaissances.replaceAll("è", "e");
 				lineLieuxNaissances = lineLieuxNaissances.replaceAll("Î", "I");
+				lineLieuxNaissances = lineLieuxNaissances.replaceAll("ü", "u");
 				lineLieuxNaissances = lineLieuxNaissances.trim();
 				if(!lineLieuxNaissances.isEmpty()) {
 					lineLieuxNaissances = lineLieuxNaissances.substring(0, 1).toUpperCase() + lineLieuxNaissances.substring(1);
@@ -425,6 +423,7 @@ public class LecteurCsv {
 				lieuNaissance = lieuNaissance.replaceAll("é", "e");
 				lieuNaissance = lieuNaissance.replaceAll("è", "e");
 				lieuNaissance = lieuNaissance.replaceAll("Î", "I");
+				lieuNaissance = lieuNaissance.replaceAll("ü", "u");
 				lieuNaissance = lieuNaissance.trim();
 				if(!lieuNaissance.isEmpty()) {
 					lieuNaissance = lieuNaissance.substring(0, 1).toUpperCase() + lieuNaissance.substring(1);
@@ -470,10 +469,12 @@ public class LecteurCsv {
 				Acteur actuelActeur = Acteur.getActeurByImdb(listeActeurMAJ, idIdmbActeur);
 
 				Role actuelRole = new Role(personnage);
-				actuelRole.setFilm(actuelFilm);
-				actuelRole.setActeur(actuelActeur);
-
-				arrayRole.add(actuelRole);
+				if (actuelFilm != null && actuelActeur != null) {
+					actuelRole.setFilm(actuelFilm);
+					actuelRole.setActeur(actuelActeur);
+	
+					arrayRole.add(actuelRole);
+				}
 			}
 
 		} catch (

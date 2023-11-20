@@ -34,15 +34,13 @@ public class IntegrationTpFilm {
 		
 		
 		List<Pays> arrayPays = lecteurCsv.parsePays(fichierPays);
+		List<Genre> arrayGenre = lecteurCsv.parseGenre(fichierFilm);
+		List<Langue> arrayLangue = lecteurCsv.parseLangue(fichierFilm);
 		List<LieuNaissance> arrayLieuNaissance = lecteurCsv.parseLieuNaissance(fichierRealisateur, fichierActeur);
 		List<Acteur> arrayActeur = lecteurCsv.parseActeur(fichierActeur, arrayLieuNaissance);
 		List<Realisateur> arrayRealisateur = lecteurCsv.parseRealisateur(fichierRealisateur, arrayLieuNaissance);
-		List<Film> arrayFilm = lecteurCsv.parseFilm(fichierFilm, fichierPays);
+		List<Film> arrayFilm = lecteurCsv.parseFilm(fichierFilm, arrayPays, arrayLangue, arrayGenre);
 		List<Role> arrayRole = lecteurCsv.parseRole(fichierRole, arrayActeur, arrayFilm);
-		List<String> arrayFilmRealisateur = lecteurCsv.parseFilmRealisateur(fichierFilmRealisateur, arrayRealisateur, arrayFilm);
-		List<String> arrayCastingPrincipal = lecteurCsv.parseCastingPrincipal(fichierCastingPrincipal, arrayActeur, arrayFilm);
-		List<Genre> arrayGenre = lecteurCsv.parseGenre(fichierFilm);
-		List<Langue> arrayLangue = lecteurCsv.parseLangue(fichierFilm);
 		
 		
 		
@@ -75,6 +73,17 @@ public class IntegrationTpFilm {
 		for (Realisateur realisateurs : arrayRealisateur) {
 			em.persist(realisateurs);
 		}
+		
+		for (Film films : arrayFilm) {
+			em.persist(films);
+		}
+		
+		for (Role roles : arrayRole) {
+			em.persist(roles);
+		}
+		
+		lecteurCsv.parseFilmRealisateur(fichierFilmRealisateur, arrayRealisateur, arrayFilm);
+		lecteurCsv.parseCastingPrincipal(fichierCastingPrincipal, arrayActeur, arrayFilm);
 		
 		transaction.commit();
 		
