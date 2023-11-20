@@ -11,6 +11,7 @@ import fr.diginamic.entite.Acteur;
 import fr.diginamic.entite.Film;
 import fr.diginamic.entite.Genre;
 import fr.diginamic.entite.Langue;
+import fr.diginamic.entite.LieuNaissance;
 import fr.diginamic.entite.Pays;
 import fr.diginamic.entite.Realisateur;
 import fr.diginamic.entite.Role;
@@ -21,17 +22,9 @@ public class IntegrationTpFilm {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-//		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("cinema");
-//		EntityManager em = entityManagerFactory.createEntityManager();
-//		EntityTransaction transaction = em.getTransaction();
-//		
-//		transaction.begin();
-//		transaction.commit();
-		
-		
 		String fichierActeur = "acteurs.csv";
 		String fichierCastingPrincipal = "castingPrincipal.csv";
-		String fichierFilmRealisateur = "film_realisateur.csv";
+		String fichierFilmRealisateur = "film_realisateurs.csv";
 		String fichierFilm = "films.csv";
 		String fichierPays = "pays.csv";
 		String fichierRealisateur = "realisateurs.csv";
@@ -41,15 +34,51 @@ public class IntegrationTpFilm {
 		
 		
 		List<Pays> arrayPays = lecteurCsv.parsePays(fichierPays);
-		List<Acteur> arrayActeur = lecteurCsv.parseActeur(fichierActeur);
-		List<Realisateur> arrayRealisateur = lecteurCsv.parseRealisateur(fichierRealisateur);
+		List<LieuNaissance> arrayLieuNaissance = lecteurCsv.parseLieuNaissance(fichierRealisateur, fichierActeur);
+		List<Acteur> arrayActeur = lecteurCsv.parseActeur(fichierActeur, arrayLieuNaissance);
+		List<Realisateur> arrayRealisateur = lecteurCsv.parseRealisateur(fichierRealisateur, arrayLieuNaissance);
 		List<Film> arrayFilm = lecteurCsv.parseFilm(fichierFilm, fichierPays);
-		List<Role> arrayRole = lecteurCsv.parseRole(fichierRole);
-
-		System.out.println(arrayRole);
+		List<Role> arrayRole = lecteurCsv.parseRole(fichierRole, arrayActeur, arrayFilm);
+		List<String> arrayFilmRealisateur = lecteurCsv.parseFilmRealisateur(fichierFilmRealisateur, arrayRealisateur, arrayFilm);
+		List<String> arrayCastingPrincipal = lecteurCsv.parseCastingPrincipal(fichierCastingPrincipal, arrayActeur, arrayFilm);
+		List<Genre> arrayGenre = lecteurCsv.parseGenre(fichierFilm);
+		List<Langue> arrayLangue = lecteurCsv.parseLangue(fichierFilm);
+		
+		
+		
+		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("cinema");
+		EntityManager em = entityManagerFactory.createEntityManager();
+		EntityTransaction transaction = em.getTransaction();
+		
+		transaction.begin();
+		
+		for (Pays pays : arrayPays) {
+			em.persist(pays);
+		}
+		
+		for (Genre genres : arrayGenre) {
+			em.persist(genres);
+		}
+		
+		for (Langue langues : arrayLangue) {
+			em.persist(langues);
+		}
+		
+		for (LieuNaissance lieuNaissance : arrayLieuNaissance) {
+			em.persist(lieuNaissance);
+		}
+		
+		for (Acteur acteurs : arrayActeur) {
+			em.persist(acteurs);
+		}
+		
+		for (Realisateur realisateurs : arrayRealisateur) {
+			em.persist(realisateurs);
+		}
+		
+		transaction.commit();
 		
 
-//		String[] tokens = afficherFichier.split("\\|", -1);
 	}
 
 }

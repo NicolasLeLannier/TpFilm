@@ -53,29 +53,29 @@ public class Film {
 	
 	/** langue */
 	@ManyToOne
-	@JoinColumn(name = "ID_LANGUE", referencedColumnName = "ID")
+	@JoinColumn(name = "ID_LANGUE")
 	private Langue langue;
 	
 	/** pays */
 	@ManyToOne
-	@JoinColumn(name = "ID_PAYS", referencedColumnName = "ID")
+	@JoinColumn(name = "ID_PAYS")
 	private Pays pays;
 	
 	/** genres */
 	@ManyToMany
 	@JoinTable(name = "FILM_GENRE",joinColumns = @JoinColumn(name = "ID_FILM", referencedColumnName = "ID"), 
 								inverseJoinColumns = @JoinColumn(name = "ID_GENRE", referencedColumnName = "ID"))
-	private List<Genre> genres;
+	private List<Genre> genres = new ArrayList<>();
 	
 	/** realisateur */
 	@ManyToMany
 	@JoinTable(name = "FILM_REALISATEUR",joinColumns = @JoinColumn(name = "ID_FILM", referencedColumnName = "ID"), 
 								inverseJoinColumns = @JoinColumn(name = "ID_REALISATEUR", referencedColumnName = "ID"))
-	private List<Realisateur> realisateur;
+	private List<Realisateur> realisateur = new ArrayList<>();
 	
 	/** listeFilm */
 	@OneToMany(mappedBy="film")
-	private List<Role> listeRole;
+	private List<Role> listeRole = new ArrayList<>();
 	
 	/** acteur */
 	@ManyToMany

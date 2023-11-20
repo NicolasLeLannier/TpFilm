@@ -33,7 +33,6 @@ public class Acteur {
 	private String idImdb;
 
 	/** identite */
-	@Column(unique=true)
 	private String identite;
 	
 	/** date_naissance */
@@ -45,12 +44,12 @@ public class Acteur {
 	
 	/** listeActeur */
 	@OneToMany(mappedBy="acteur")
-	private List<Role> listeRole;
+	private List<Role> listeRole = new ArrayList<>();
 	
 	/** acteur */
 	@ManyToOne
-	@JoinColumn(name = "LIEU_NAISSANCE_ACTEUR")
-	private LieuNaissance lieuNaissanceActeur;
+	@JoinColumn(name = "ID_LIEU_NAISSANCE")
+	private LieuNaissance lieuNaissance;
 	
 	/** films */
 	@ManyToMany(mappedBy = "acteur")
@@ -81,7 +80,7 @@ public class Acteur {
 	public String toString() {
 		return "Acteur [id=" + id + ", id_imdb=" + idImdb + ", identite=" + identite + ", date_naissance="
 				+ dateNaissance + ", url=" + url  + ", lieuNaissanceActeur="
-				+ lieuNaissanceActeur + "]";
+				+ lieuNaissance + "]";
 	}
 	
 	/**
@@ -199,17 +198,17 @@ public class Acteur {
 	}
 
 	/** Getter
-	 * @return the lieuNaissanceActeur
+	 * @return the lieuNaissance
 	 */
-	public LieuNaissance getLieuNaissanceActeur() {
-		return lieuNaissanceActeur;
+	public LieuNaissance getLieuNaissance() {
+		return lieuNaissance;
 	}
 
 	/** Setter
-	 * @param lieuNaissanceActeur the lieuNaissanceActeur to set
+	 * @param lieuNaissance the lieuNaissance to set
 	 */
-	public void setLieuNaissanceActeur(LieuNaissance lieuNaissanceActeur) {
-		this.lieuNaissanceActeur = lieuNaissanceActeur;
+	public void setLieuNaissance(LieuNaissance lieuNaissance) {
+		this.lieuNaissance = lieuNaissance;
 	}
 
 	

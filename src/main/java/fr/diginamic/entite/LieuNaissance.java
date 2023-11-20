@@ -24,11 +24,11 @@ public class LieuNaissance {
 	private String nom;
 
 	/** realisateur */
-	@OneToMany(mappedBy = "idLieuNaissanceRealisateur")
+	@OneToMany(mappedBy = "lieuNaissance")
 	private List<Realisateur> realisateur;
 	
 	/** acteur */
-	@OneToMany(mappedBy = "idLieuNaissanceActeur")
+	@OneToMany(mappedBy = "lieuNaissance")
 	private List<Acteur> acteur;
 	
 	/** Constructor

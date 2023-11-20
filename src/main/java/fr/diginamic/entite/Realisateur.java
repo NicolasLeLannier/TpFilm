@@ -1,6 +1,7 @@
 package fr.diginamic.entite;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -31,7 +32,6 @@ public class Realisateur {
 	private String idImdb;
 
 	/** identite */
-	@Column(unique=true)
 	private String identite;
 	
 	/** date_naissance */
@@ -43,12 +43,12 @@ public class Realisateur {
 	
 	/** films */
 	@ManyToMany(mappedBy = "realisateur")
-	private List<Film> films;
+	private List<Film> films = new ArrayList<>();
 	
 	/** acteur */
 	@ManyToOne
-	@JoinColumn(name = "LIEU_NAISSANCE_REALISATEUR")
-	private LieuNaissance lieuNaissanceRealisateur;
+	@JoinColumn(name = "ID_LIEU_NAISSANCE")
+	private LieuNaissance lieuNaissance;
 
 	/** Constructor
 	 * @param id_imdb
@@ -70,17 +70,31 @@ public class Realisateur {
 	public Realisateur() {
 		super();
 	}
-
+	
 	/**
 	 *
 	 */
 	@Override
 	public String toString() {
 		return "Realisateur [id=" + id + ", idImdb=" + idImdb + ", identite=" + identite + ", dateNaissance="
-				+ dateNaissance + ", url=" + url + ", films=" + films + ", lieuNaissanceRealisateur="
-				+ lieuNaissanceRealisateur + "]";
+				+ dateNaissance + ", url=" + url + ", films=" + films + ", lieuNaissance=" + lieuNaissance + "]";
 	}
 
+	/**
+	 * @param listRealisateur
+	 * @param idmb
+	 * @return
+	 */
+	public static Realisateur getRealisateurByImdb(List<Realisateur> listRealisateur, String idmb) {
+		for(Realisateur realisateurs : listRealisateur) {
+			if(realisateurs.getIdImdb().equals(idmb)) {
+				return realisateurs;
+			}
+		}
+		return null;
+	}
+	
+	
 	/** Getter
 	 * @return the id
 	 */
@@ -166,20 +180,18 @@ public class Realisateur {
 	}
 
 	/** Getter
-	 * @return the lieuNaissanceRealisateur
+	 * @return the lieuNaissance
 	 */
-	public LieuNaissance getLieuNaissanceRealisateur() {
-		return lieuNaissanceRealisateur;
+	public LieuNaissance getLieuNaissance() {
+		return lieuNaissance;
 	}
 
 	/** Setter
-	 * @param lieuNaissanceRealisateur the lieuNaissanceRealisateur to set
+	 * @param lieuNaissance the lieuNaissance to set
 	 */
-	public void setLieuNaissanceRealisateur(LieuNaissance lieuNaissanceRealisateur) {
-		this.lieuNaissanceRealisateur = lieuNaissanceRealisateur;
+	public void setLieuNaissance(LieuNaissance lieuNaissance) {
+		this.lieuNaissance = lieuNaissance;
 	}
 
-
-	
 	
 }
