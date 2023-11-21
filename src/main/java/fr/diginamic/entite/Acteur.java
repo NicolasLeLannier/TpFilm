@@ -76,6 +76,9 @@ public class Acteur {
 		super();
 	}
 
+	/**
+	 *
+	 */
 	@Override
 	public String toString() {
 		return "Acteur [id=" + id + ", id_imdb=" + idImdb + ", identite=" + identite + ", date_naissance="

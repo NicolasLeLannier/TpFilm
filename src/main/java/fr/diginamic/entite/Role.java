@@ -46,6 +46,9 @@ public class Role {
 		this.personnage = personnage;
 	}
 
+	/**
+	 *
+	 */
 	@Override
 	public String toString() {
 		return "Role [id=" + id + ", personnage=" + personnage + ", acteur=" + acteur + ", film=" + film + "]";
